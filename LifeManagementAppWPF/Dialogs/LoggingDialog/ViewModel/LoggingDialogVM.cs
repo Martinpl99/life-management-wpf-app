@@ -1,22 +1,32 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LifeManagementAppWPF.Common.Windows.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LifeManagementAppWPF.Dialogs.LoggingDialog.Interfaces;
 using System.Windows.Input;
 
-namespace LifeManagementAppWPF.Windows.LoggingWindow.ViewModel
+namespace LifeManagementAppWPF.Dialogs.LoggingDialog.ViewModel
 {
-    internal class LoggingWindowVM : ObservableObject, IOkWindow, ICancelWindow
+    internal class LoggingDialogVM : ObservableObject,
+        ILoggingDialogVM,
+        IOkWindow,
+        ICancelWindow
     {
-        public LoggingWindowVM()
+        public LoggingDialogVM()
         {
             OnOkCommand = new RelayCommand(() => OnOkCommandExecute());
             OnCancelCommand = new RelayCommand(() => OnCancelCommandExecute());
         }
+
+        #region Properties
+
+        private string _userId = string.Empty;
+        public string UserId
+        {
+            get => _userId;
+            set => SetProperty(ref  _userId, value);
+        }
+
+        #endregion
 
         #region OnOkWindowBehaviourEvents
 

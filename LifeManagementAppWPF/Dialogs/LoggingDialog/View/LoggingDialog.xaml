@@ -1,0 +1,87 @@
+﻿<mah:MetroWindow x:Class="LifeManagementAppWPF.Dialogs.LoggingDialog.View.LoggingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LifeManagementAppWPF.Dialogs.LoggingDialog.ViewModel"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:commonBehaviors="clr-namespace:LifeManagementAppWPF.Common.Windows.Behaviors"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:validaitonRules="clr-namespace:LifeManagementAppWPF.Common.Validation"
+        xmlns:conv="clr-namespace:LifeManagementAppWPF.Common.Converters"
+        SizeToContent="WidthAndHeight"
+        MinWidth="500"
+        MinHeight="200"
+        mc:Ignorable="d"
+        Title="Give your user id" Height="450" Width="800">
+
+    <i:Interaction.Behaviors>
+        <commonBehaviors:OkCancelDailogBehavior/>
+    </i:Interaction.Behaviors>
+
+    <Window.Resources>
+        <Thickness x:Key="marginResource" Left="50" Right="50" Bottom="10" Top="10"/>
+        <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition MinWidth="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Column="0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="{StaticResource marginResource}"
+                           HorizontalContentAlignment="Left"
+                           VerticalContentAlignment="Center"
+                           Content="User Id :"/>
+
+            <TextBox Grid.Column="1"
+                        x:Name="GuidTextBox"
+                         mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
+                         MinWidth="250"
+                         Margin="{StaticResource marginResource}"
+                         mah:TextBoxHelper.Watermark="Type your Id"
+                         mah:TextBoxHelper.ClearTextButton="True"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Center">
+                <TextBox.Text>
+                    <Binding Path="UserId" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validaitonRules:GuidValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+
+        <Button Grid.Row="1"
+                Content="OK"
+                IsEnabled="{Binding (Validation.HasError), ElementName=GuidTextBox, Converter={StaticResource InverseBooleanConverter}}"
+                MaxHeight="50"
+                Margin="{StaticResource marginResource}"
+                Command="{Binding OnOkCommand}"
+                IsDefault="True"/>
+        
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                MaxHeight="50"
+                Margin="{StaticResource marginResource}"
+                Command="{Binding OnCancelCommand}"
+                Content="Cancel" />
+    </Grid>
+</mah:MetroWindow>

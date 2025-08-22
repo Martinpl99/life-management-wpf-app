@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LifeManagementAppWPF.Global
 {
-    internal class GlobalData
+    public interface IApplicationContext
     {
-        public Guid UserId { get; set; }
+        Guid UserId { get; set; }
     }
 }
