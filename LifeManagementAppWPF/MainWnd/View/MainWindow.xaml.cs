@@ -13,5 +13,10 @@ namespace LifeManagementAppWPF.MainWnd.View
             InitializeComponent();
             DataContext = mainWindowVM;
         }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,9 +7,11 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:vm="clr-namespace:LifeManagementAppWPF"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:commonBehaviors="clr-namespace:LifeManagementAppWPF.Common.Windows.Behaviors"
+        xmlns:tabItems="clr-namespace:LifeManagementAppWPF.Sources.Tabitems"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Life Management App" Height="450" Width="800">
 
     <i:Interaction.Behaviors>
         <commonBehaviors:OkCancelDailogBehavior/>
@@ -20,8 +22,19 @@
             <i:InvokeCommandAction Command="{Binding WindowLoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
- 
+
     <Grid>
-        <Button Content="CLICK ME" Command="{Binding ButtonClickCommand}"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TabControl 
+            mah:HeaderedControlHelper.HeaderFontSize="20"
+            mah:TabControlHelper.Underlined="TabItems"
+            TabStripPlacement="Top">
+            <tabItems:UserInfoTabItem/>
+        </TabControl>
+        
+        <!--<Button Style="{DynamicResource MahApps.Styles.Button}" Grid.Row="1" Content="CLICK ME" Command="{Binding ButtonClickCommand}"></Button>-->
     </Grid>
 </mah:MetroWindow>

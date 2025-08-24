@@ -65,24 +65,24 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
 
         private void OpenLoggingWindow()
         {
-            var result = _loggingWindow.ShowDialog();
+            //var result = _loggingWindow.ShowDialog();
 
-            if (result == true)
-            {
-                if (_loggingWindow.DataContext is not ILoggingDialogVM)
-                    CloseWindow();
+            //if (result == true)
+            //{
+            //    if (_loggingWindow.DataContext is not ILoggingDialogVM)
+            //        CloseWindow();
 
-                var viewModel = _loggingWindow.DataContext as ILoggingDialogVM;
+            //    var viewModel = _loggingWindow.DataContext as ILoggingDialogVM;
 
-                if (!Guid.TryParse(viewModel.UserId, out var userId))
-                    CloseWindow();
+            //    if (!Guid.TryParse(viewModel.UserId, out var userId))
+            //        CloseWindow();
 
-                _applicationContext.UserId = userId;
-            }
-            else
-            {
-                CloseWindow();
-            }
+            //    _applicationContext.UserId = userId;
+            //}
+            //else
+            //{
+            //    CloseWindow();
+            //}
         }
 
         private void CloseWindow()

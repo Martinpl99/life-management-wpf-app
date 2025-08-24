@@ -25,7 +25,9 @@ namespace LifeManagementAppWPF
 
             ServiceProvider = services.BuildServiceProvider();
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
+            mainWindow.ShowDialog();
+            mainWindow.Close();
+            Shutdown();
 
         }
 
