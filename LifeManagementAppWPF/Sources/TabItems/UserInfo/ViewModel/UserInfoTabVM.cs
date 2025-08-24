@@ -49,11 +49,11 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
 
         #region Methods
 
-        public void TabItemLoadedExec()
+        public async Task TabItemLoadedExec()
         {
-            //var user = _userService.GetUserById(_applicationContext.UserId);
-            //var infoTabData = _autoMapper.Map<UserInfoTabData>(user);
-            //UserInfoTabData = infoTabData;
+            var user = await _userService.GetUserById(_applicationContext.UserId);
+            var infoTabData = _autoMapper.Map<UserInfoTabData>(user);
+            UserInfoTabData = infoTabData;
         }
 
         #endregion
