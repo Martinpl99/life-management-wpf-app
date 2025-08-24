@@ -46,7 +46,5 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-        
-        <!--<Button Style="{DynamicResource MahApps.Styles.Button}" Grid.Row="1" Content="CLICK ME" Command="{Binding ButtonClickCommand}"></Button>-->
     </Grid>
 </mah:MetroWindow>

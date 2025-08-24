@@ -51,6 +51,11 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
 
         public async Task TabItemLoadedExec()
         {
+            await GetUserData();
+        }
+
+        private async Task GetUserData()
+        {
             var user = await _userService.GetUserById(_applicationContext.UserId);
 
             if (user == null) return;

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LifeManagementAppWPF.Common.Windows.Interfaces;
+using LifeManagementAppWPF.Dialogs.LoggingDialog.Interfaces;
 using LifeManagementAppWPF.Dialogs.LoggingDialog.View;
 using LifeManagementAppWPF.Global;
 using LifeManagementAppWPF.MainWnd.Interfaces;
@@ -10,6 +11,7 @@ using LifeManagementAppWPF.Sources.TabItems.ViewModel;
 using LiveManagementAppDatabase.DatabaseServices.Interfaces;
 using LiveManagementAppDatabase.DatabaseServices.Services;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LifeManagementAppWPF.MainWnd.ViewModel
@@ -35,7 +37,6 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
             _mapper = mapper;
 
             _userService = new UserService();
-            ButtonClickCommand = new RelayCommand(() => ButtonClickCommandExec());
             WindowLoadedCommand = new RelayCommand(() => OnWindowLoaded());
             GenerateTabItems();
         }
@@ -56,15 +57,8 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
         #endregion
 
         #region Commands
-        private ICommand _buttonClickCommand;
-        public ICommand ButtonClickCommand
-        {
-            get => _buttonClickCommand;
-            set => SetProperty(ref _buttonClickCommand, value);
-        }
 
         private ICommand _windowLoadedCommand;
-
         public ICommand WindowLoadedCommand
         {
             get => _windowLoadedCommand;
@@ -77,11 +71,6 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
         {
             TabItems.Add(new UserInfoTabVM(_userService, _applicationContext, _mapper));
         }
-        private async Task ButtonClickCommandExec()
-        {
-            await _userService.GetUserById(_applicationContext.UserId);
-        }
-
         private void OnWindowLoaded()
         {
             OpenLoggingWindow();
@@ -93,7 +82,7 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
 
             //if (result == true)
             //{
-            //    if (_loggingWindow.DataContext is not ILoggingDialogVM)
+            //    if (_loggingWindow.DataContext is not ILoggingDialogVM) 
             //        CloseWindow();
 
             //    var viewModel = _loggingWindow.DataContext as ILoggingDialogVM;
@@ -105,7 +94,7 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
             //}
             //else
             //{
-            //    CloseWindow();
+            //    Application.Current.Shutdown();
             //}
         }
 

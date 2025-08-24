@@ -6,7 +6,6 @@ namespace LifeManagementAppWPF.MainWnd.Interfaces
 {
     public interface IMainWindowVM
     {
-        ICommand ButtonClickCommand { get; set; }
         ICommand WindowLoadedCommand { get; set; }
         ObservableCollection<ITabItemVM> TabItems { get; set; }
     }
