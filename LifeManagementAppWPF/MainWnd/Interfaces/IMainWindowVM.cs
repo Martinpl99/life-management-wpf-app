@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LifeManagementAppWPF.Sources.TabItems.Interface;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace LifeManagementAppWPF.MainWnd.Interfaces
@@ -11,5 +8,6 @@ namespace LifeManagementAppWPF.MainWnd.Interfaces
     {
         ICommand ButtonClickCommand { get; set; }
         ICommand WindowLoadedCommand { get; set; }
+        ObservableCollection<ITabItemVM> TabItems { get; set; }
     }
 }

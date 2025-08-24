@@ -1,13 +1,20 @@
-﻿<mah:MetroTabItem x:Class="LifeManagementAppWPF.Sources.Tabitems.UserInfoTabItem"
+﻿<UserControl x:Class="LifeManagementAppWPF.Sources.TabItems.UserInfoTabItem"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LifeManagementAppWPF.Sources.Tabitems"
+             xmlns:local="clr-namespace:LifeManagementAppWPF.Sources.TabItems"
              mc:Ignorable="d" 
-             Header="User Data"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding TabItemLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -39,4 +46,4 @@
         </GroupBox>
         
     </Grid>
-</mah:MetroTabItem>
+</UserControl>

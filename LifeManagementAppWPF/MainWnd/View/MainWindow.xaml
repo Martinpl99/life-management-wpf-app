@@ -9,7 +9,8 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:commonBehaviors="clr-namespace:LifeManagementAppWPF.Common.Windows.Behaviors"
-        xmlns:tabItems="clr-namespace:LifeManagementAppWPF.Sources.Tabitems"
+        xmlns:views="clr-namespace:LifeManagementAppWPF.Sources.TabItems"
+        xmlns:interfaces="clr-namespace:LifeManagementAppWPF.Sources.TabItems.Interface"
         mc:Ignorable="d"
         Title="Life Management App" Height="450" Width="800">
 
@@ -31,8 +32,19 @@
         <TabControl 
             mah:HeaderedControlHelper.HeaderFontSize="20"
             mah:TabControlHelper.Underlined="TabItems"
+            ItemsSource="{Binding TabItems}"
             TabStripPlacement="Top">
-            <tabItems:UserInfoTabItem/>
+            <TabControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type interfaces:ITabItemVM}">
+                    <TextBlock Text="{Binding Header}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ContentTemplate>
+                <DataTemplate DataType="{x:Type interfaces:IUserInfoTabViewModel}">
+                    <views:UserInfoTabItem />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
         
         <!--<Button Style="{DynamicResource MahApps.Styles.Button}" Grid.Row="1" Content="CLICK ME" Command="{Binding ButtonClickCommand}"></Button>-->

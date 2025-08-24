@@ -8,6 +8,6 @@ namespace LifeManagementAppWPF.Global
 {
     public class ApplicationContext : IApplicationContext
     {
-        public Guid UserId { get; set; }
+        public Guid UserId { get; set; } = Guid.Parse("01988695-61c0-7259-9f76-f03d4b23ec29");
     }
 }
