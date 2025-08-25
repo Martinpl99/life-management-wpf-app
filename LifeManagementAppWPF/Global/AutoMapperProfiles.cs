@@ -8,7 +8,11 @@ namespace LifeManagementAppWPF.Global
     {
         public UserProfile()
         {
-            CreateMap<UserGetDto, UserInfoTabData>();
+            CreateMap<UserAddressGetDto, UserAddress>().ReverseMap();
+            CreateMap<UserAddressUpdateDto, UserAddress>().ReverseMap();
+
+            CreateMap<UserGetDto, UserInfoTabData>().ReverseMap();
+            CreateMap<UserUpdateDto, UserInfoTabData>().ReverseMap();
         }
     }
 }

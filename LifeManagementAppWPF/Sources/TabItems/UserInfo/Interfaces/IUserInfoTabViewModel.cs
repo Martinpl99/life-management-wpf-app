@@ -6,6 +6,7 @@ namespace LifeManagementAppWPF.Sources.TabItems.Interface
     public interface IUserInfoTabViewModel
     {
         ICommand TabItemLoaded { get; set; }
+        ICommand UpdateUserDataCommand { get; set; }
         UserInfoTabData UserInfoTabData { get; set; }
     }
 }

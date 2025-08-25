@@ -18,5 +18,12 @@ namespace LifeManagementAppWPF.Sources.TabItems.UserInfo.Model
             get => _lastName;
             set => SetProperty(ref _lastName, value);
         }
+
+        private UserAddress _userAddress = new UserAddress();
+        public UserAddress UserAddress
+        {
+            get => _userAddress;
+            set => SetProperty(ref _userAddress, value);
+        }
     }
 }

@@ -12,6 +12,10 @@
         xmlns:views="clr-namespace:LifeManagementAppWPF.Sources.TabItems"
         xmlns:interfaces="clr-namespace:LifeManagementAppWPF.Sources.TabItems.Interface"
         mc:Ignorable="d"
+        MinHeight="600"
+        MinWidth="800"
+        ResizeMode="CanResize"
+        SizeToContent="WidthAndHeight"
         Title="Life Management App" Height="450" Width="800">
 
     <i:Interaction.Behaviors>

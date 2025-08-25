@@ -1,13 +1,8 @@
 ﻿using LiveManagementAppDatabase.DatabaseServices.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LiveManagementAppDatabase.DatabaseSettings;
-using System.Text.Json;
-using MyFirstWebAPIProject.Dto;
 using LiveManagementAppDatabase.Utils.Serializers;
+using MyFirstWebAPIProject.Dto;
+using System.Text;
 
 namespace LiveManagementAppDatabase.DatabaseServices.Services
 {
@@ -15,7 +10,7 @@ namespace LiveManagementAppDatabase.DatabaseServices.Services
     {
         private readonly string apiUserAddress =
                 DatabaseOpt.DatabaseAddress + DatabaseOpt.UserEndpointAddress;
-        public async Task<UserGetDto?> GetUserById(Guid id)
+        public async Task<UserGetDto?> GetUserByIdAsync(Guid id)
         {
             using var httpClient = new HttpClient();
 
@@ -27,10 +22,27 @@ namespace LiveManagementAppDatabase.DatabaseServices.Services
                 var userDto = JsonHelper.DeserializeAsync<UserGetDto>(responseStream);
                 return await userDto; 
             }
-            else
+
+            return null;
+        }
+
+        public async Task<UserGetDto?> UpdateUserByIdAsync(Guid userId, UserUpdateDto userUpdateDto)
+        {
+            using var httpClient = new HttpClient();
+
+            var json = JsonHelper.Serialize(userUpdateDto); 
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PutAsync(apiUserAddress + "/" +userId, content);
+
+            if (response.IsSuccessStatusCode)
             {
-                return null;
+                var responseStream = await response.Content.ReadAsStreamAsync();
+                var userDto = JsonHelper.DeserializeAsync<UserGetDto>(responseStream);
+                return await userDto;
             }
+
+            return null;
         }
     }
 }

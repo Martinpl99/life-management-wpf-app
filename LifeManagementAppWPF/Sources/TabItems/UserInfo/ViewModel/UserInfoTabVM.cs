@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LifeManagementAppWPF.Global;
 using LifeManagementAppWPF.Sources.TabItems.Interface;
 using LifeManagementAppWPF.Sources.TabItems.UserInfo.Model;
 using LiveManagementAppDatabase.DatabaseServices.Interfaces;
+using MyFirstWebAPIProject.Dto;
 using System.Windows.Input;
 
 namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
@@ -22,7 +22,8 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
             _applicationContext = appContext;
             _autoMapper = autoMapper;
             Header = "User Data";
-            TabItemLoaded = new RelayCommand(() => TabItemLoadedExec());
+            TabItemLoaded = new RelayCommand(async () => await TabItemLoadedExec());
+            UpdateUserDataCommand = new RelayCommand(async() => await UpdateUserDataCommandExec());
         }
 
         #region Properties
@@ -45,6 +46,13 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
             set => SetProperty(ref _tabItemLoaded, value);
         }
 
+        private ICommand _updateUserDataCommand;
+        public ICommand UpdateUserDataCommand 
+        { 
+            get => _updateUserDataCommand;
+            set => SetProperty(ref _updateUserDataCommand, value);
+        }
+
         #endregion
 
         #region Methods
@@ -56,12 +64,26 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
 
         private async Task GetUserData()
         {
-            var user = await _userService.GetUserById(_applicationContext.UserId);
+            var user = await _userService.GetUserByIdAsync(_applicationContext.UserId);
 
             if (user == null) return;
 
             var infoTabData = _autoMapper.Map<UserInfoTabData>(user);
             UserInfoTabData = infoTabData;
+        }
+
+        private async Task UpdateUserDataCommandExec()
+        {
+            var userUpdateDto = _autoMapper.Map<UserUpdateDto>(UserInfoTabData);
+
+            var userGetDto = await _userService.UpdateUserByIdAsync(_applicationContext.UserId, userUpdateDto);
+
+            var infoTabData = _autoMapper.Map<UserInfoTabData>(userGetDto);
+
+            if(infoTabData != null)
+                UserInfoTabData = infoTabData;
+            else
+                await GetUserData();
         }
 
         #endregion

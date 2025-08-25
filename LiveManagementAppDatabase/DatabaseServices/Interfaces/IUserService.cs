@@ -9,6 +9,7 @@ namespace LiveManagementAppDatabase.DatabaseServices.Interfaces
 {
     public interface IUserService
     {
-        Task<UserGetDto?> GetUserById(Guid id);
+        Task<UserGetDto?> GetUserByIdAsync(Guid id);
+        Task<UserGetDto?> UpdateUserByIdAsync(Guid userId, UserUpdateDto userUpdateDto);
     }
 }
