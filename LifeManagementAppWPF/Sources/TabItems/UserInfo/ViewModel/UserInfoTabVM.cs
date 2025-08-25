@@ -21,9 +21,10 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
             _userService = userService;
             _applicationContext = appContext;
             _autoMapper = autoMapper;
+
             Header = "User Data";
-            TabItemLoaded = new RelayCommand(async () => await TabItemLoadedExec());
-            UpdateUserDataCommand = new RelayCommand(async() => await UpdateUserDataCommandExec());
+            TabItemLoaded = new RelayCommand(() =>TabItemLoadedExec());
+            UpdateUserDataCommand = new RelayCommand(() =>UpdateUserDataCommandExec());
         }
 
         #region Properties
