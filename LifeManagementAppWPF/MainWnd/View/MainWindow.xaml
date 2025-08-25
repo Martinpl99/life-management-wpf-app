@@ -19,7 +19,7 @@
         Title="Life Management App" Height="450" Width="800">
 
     <i:Interaction.Behaviors>
-        <commonBehaviors:OkCancelDailogBehavior/>
+        <commonBehaviors:OkCancelDialogBehavior/>
     </i:Interaction.Behaviors>
     
     <i:Interaction.Triggers>

@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace LifeManagementAppWPF.Common.Windows.Behaviors
 {
-    internal class OkCancelDailogBehavior : Behavior<Window>
+    internal class OkCancelDialogBehavior : Behavior<Window>
     {
         protected override void OnAttached()
         {
