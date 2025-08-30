@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LifeManagementAppWPF.Common.Windows.Interfaces;
-using LifeManagementAppWPF.Dialogs.LoggingDialog.Interfaces;
 using LifeManagementAppWPF.Dialogs.LoggingDialog.View;
 using LifeManagementAppWPF.Global;
 using LifeManagementAppWPF.MainWnd.Interfaces;
@@ -11,7 +10,6 @@ using LifeManagementAppWPF.Sources.TabItems.ViewModel;
 using LiveManagementAppDatabase.DatabaseServices.Interfaces;
 using LiveManagementAppDatabase.DatabaseServices.Services;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace LifeManagementAppWPF.MainWnd.ViewModel
@@ -70,6 +68,7 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
         private void GenerateTabItems()
         {
             TabItems.Add(new UserInfoTabVM(_userService, _applicationContext, _mapper));
+            TabItems.Add(new TODOItemVM());
         }
         private void OnWindowLoaded()
         {

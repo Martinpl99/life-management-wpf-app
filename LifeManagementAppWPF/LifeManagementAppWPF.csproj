@@ -24,11 +24,4 @@
     <ProjectReference Include="..\LiveManagementAppDatabase\LiveManagementAppDatabase.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Sources\TabItems\ToDo\Interfaces\" />
-    <Folder Include="Sources\TabItems\ToDo\Model\" />
-    <Folder Include="Sources\TabItems\ToDo\ViewModel\" />
-    <Folder Include="Sources\TabItems\ToDo\View\" />
-  </ItemGroup>
-
 </Project>

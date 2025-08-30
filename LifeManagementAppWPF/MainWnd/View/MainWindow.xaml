@@ -11,11 +11,12 @@
         xmlns:commonBehaviors="clr-namespace:LifeManagementAppWPF.Common.Windows.Behaviors"
         xmlns:views="clr-namespace:LifeManagementAppWPF.Sources.TabItems"
         xmlns:interfaces="clr-namespace:LifeManagementAppWPF.Sources.TabItems.Interface"
+        xmlns:ViewModels="clr-namespace:LifeManagementAppWPF.Sources.TabItems.ViewModel"
         mc:Ignorable="d"
         MinHeight="600"
         MinWidth="800"
         ResizeMode="CanResize"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="Manual"
         Title="Life Management App" Height="450" Width="800">
 
     <i:Interaction.Behaviors>
@@ -38,17 +39,25 @@
             mah:TabControlHelper.Underlined="TabItems"
             ItemsSource="{Binding TabItems}"
             TabStripPlacement="Top">
+
+            <TabControl.Resources>
+
+                <DataTemplate DataType="{x:Type ViewModels:UserInfoTabVM}">
+                    <views:UserInfoTabItem />
+                </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type ViewModels:TODOItemVM}">
+                    <views:TODOTabItem/>
+                </DataTemplate>
+                
+            </TabControl.Resources>
+            
             <TabControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type interfaces:ITabItemVM}">
                     <TextBlock Text="{Binding Header}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
-
-            <TabControl.ContentTemplate>
-                <DataTemplate DataType="{x:Type interfaces:IUserInfoTabViewModel}">
-                    <views:UserInfoTabItem />
-                </DataTemplate>
-            </TabControl.ContentTemplate>
         </TabControl>
+        
     </Grid>
 </mah:MetroWindow>
