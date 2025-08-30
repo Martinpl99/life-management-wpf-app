@@ -11,9 +11,7 @@ namespace LifeManagementAppWPF.Common.Utils
                 "BindableSelectedItems",
                 typeof(IList),
                 typeof(DataGridSelectedItemsBehavior),
-                 new FrameworkPropertyMetadata(
-                    null,
-                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                 new PropertyMetadata(null,
                     OnBindableSelectedItemsChanged));
 
         public static void SetBindableSelectedItems(DependencyObject element, IList value)
