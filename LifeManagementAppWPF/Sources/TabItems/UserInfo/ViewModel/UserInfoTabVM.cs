@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.Input;
 using LifeManagementAppWPF.Common.Interfaces;
-using LifeManagementAppWPF.Common.Utils;
 using LifeManagementAppWPF.Global;
 using LifeManagementAppWPF.Sources.TabItems.Interface;
 using LifeManagementAppWPF.Sources.TabItems.UserInfo.Model;
@@ -30,8 +29,8 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
             _databaseStatus = databaseStatus;
 
             Header = "User Data";
-            TabItemLoaded = new RelayCommand(() =>TabItemLoadedExec());
-            UpdateUserDataCommand = new RelayCommand(() =>UpdateUserDataCommandExec());
+            TabItemLoaded = new RelayCommand(async () => await TabItemLoadedExec());
+            UpdateUserDataCommand = new RelayCommand(async () => await UpdateUserDataCommandExec());
         }
 
         #region Properties
@@ -91,6 +90,8 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
 
         private async Task UpdateUserDataCommandExec()
         {
+            DatabaseStatus.StartDatabaseOperation();
+
             var userUpdateDto = _autoMapper.Map<UserUpdateDto>(UserInfoTabData);
 
             var userGetDto = await _userService.UpdateUserByIdAsync(_applicationContext.UserId, userUpdateDto);
@@ -101,6 +102,8 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
                 UserInfoTabData = infoTabData;
             else
                 await GetUserData();
+
+            DatabaseStatus.EndDatabaseOperation();
         }
 
         #endregion

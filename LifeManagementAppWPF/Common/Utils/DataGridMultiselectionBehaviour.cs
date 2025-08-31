@@ -39,6 +39,8 @@ namespace LifeManagementAppWPF.Common.Utils
             {
                 var vmItems = GetBindableSelectedItems(dataGrid);
 
+                if (vmItems is null) return;
+
                 vmItems.Clear();
 
                 foreach (var dataGridItem in dataGrid.SelectedItems)
