@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LifeManagementAppWPF.Common.Utils
 {
+    /// <summary>
+    /// Progress ring data provider
+    /// </summary>
     public class DatabaseStatus : ObservableObject, IDatabaseStatus
     {
         private bool _databaseOperationIsPerforming = true;
