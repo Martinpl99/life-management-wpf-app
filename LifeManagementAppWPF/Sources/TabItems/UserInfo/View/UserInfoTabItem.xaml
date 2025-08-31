@@ -7,120 +7,134 @@
     xmlns:local="clr-namespace:LifeManagementAppWPF.Sources.TabItems"
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:CommunityToolkit.Mvvm.ComponentModel;assembly=CommunityToolkit.Mvvm"
+    xmlns:converters="clr-namespace:LifeManagementAppWPF.Common.Converters"
+    xmlns:commonControls ="clr-namespace:LifeManagementAppWPF.Common.CommonControls"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:InverseBooleanToVisibilityConverter x:Key="inverseVisiblityConverter"/>
+    </UserControl.Resources>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding TabItemLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <ScrollViewer>
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-        </Grid.RowDefinitions>
+            <commonControls:ProgressSpin/>
+            <Grid 
+                Visibility="{Binding DatabaseStatus.DatabaseOperationIsPerforming,
+                Converter={StaticResource inverseVisiblityConverter}}">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-
-        <GroupBox
-            MinWidth="200"
-            Margin="20"
-            MaxHeight="400"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Header="Personal Data">
-            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <Label Margin="5" Content="Name" />
-                <TextBox
-                    Grid.Column="1"
-                    MinWidth="120"
-                    Margin="5"
+                <GroupBox
+                    MinWidth="200"
+                    MaxHeight="400"
+                    Margin="20"
                     HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
-                    Text="{Binding UserInfoTabData.Name}" />
-                <Label
-                    Grid.Row="1"
-                    Margin="5"
-                    Content="Last Name" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    MinWidth="120"
-                    Margin="5"
-                    HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
-                    Text="{Binding UserInfoTabData.LastName}" />
+                    VerticalAlignment="Top"
+                    Header="Personal Data">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                <Label
-                    Grid.Row="2"
-                    Margin="5"
-                    Content="City" />
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    MinWidth="120"
-                    Margin="5"
-                    HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
-                    Text="{Binding UserInfoTabData.UserAddress.City}" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
 
-                <Label
-                    Grid.Row="3"
-                    Margin="5"
-                    Content="Street" />
-                <TextBox
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    MinWidth="120"
-                    Margin="5"
-                    HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
-                    Text="{Binding UserInfoTabData.UserAddress.Street}" />
+                        <Label Margin="5" Content="Name" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="120"
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Text="{Binding UserInfoTabData.Name}" />
+                        <Label
+                            Grid.Row="1"
+                            Margin="5"
+                            Content="Last Name" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            MinWidth="120"
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Text="{Binding UserInfoTabData.LastName}" />
 
-                <Label
-                    Grid.Row="4"
-                    Margin="5"
-                    Content="Phone Number" />
-                <TextBox
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    MinWidth="120"
-                    Margin="5"
-                    HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
-                    Text="{Binding UserInfoTabData.UserAddress.PhoneNumber}" />
+                        <Label
+                            Grid.Row="2"
+                            Margin="5"
+                            Content="City" />
+                        <TextBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            MinWidth="120"
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Text="{Binding UserInfoTabData.UserAddress.City}" />
 
-                <Button HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Grid.ColumnSpan="2"
-                        Margin="20"
-                        Grid.Row="5"
-                        Command="{Binding UpdateUserDataCommand}"
-                        Content="Update User Data"/>
+                        <Label
+                            Grid.Row="3"
+                            Margin="5"
+                            Content="Street" />
+                        <TextBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            MinWidth="120"
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Text="{Binding UserInfoTabData.UserAddress.Street}" />
 
+                        <Label
+                            Grid.Row="4"
+                            Margin="5"
+                            Content="Phone Number" />
+                        <TextBox
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            MinWidth="120"
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Left"
+                            Text="{Binding UserInfoTabData.UserAddress.PhoneNumber}" />
+
+                        <Button
+                            Grid.Row="5"
+                            Grid.ColumnSpan="2"
+                            Margin="20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding UpdateUserDataCommand}"
+                            Content="Update User Data" />
+
+                    </Grid>
+
+                </GroupBox>
             </Grid>
 
-        </GroupBox>
-
-    </Grid>
-</ScrollViewer>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

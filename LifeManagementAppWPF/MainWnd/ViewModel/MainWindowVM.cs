@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LifeManagementAppWPF.Common.Interfaces;
 using LifeManagementAppWPF.Common.Windows.Interfaces;
 using LifeManagementAppWPF.Dialogs.LoggingDialog.View;
 using LifeManagementAppWPF.Global;
@@ -22,17 +23,20 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
         private readonly IApplicationContext _applicationContext;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private IDatabaseStatus _databaseStatus;
         private readonly LoggingDialog _loggingWindow;
 
         public MainWindowVM(IApplicationContext appContext,
             IUserService userService,
             IMapper mapper,
+            IDatabaseStatus databaseStatus,
             LoggingDialog loggingWindow)
         {
             _applicationContext = appContext;
             _userService = userService;
             _loggingWindow = loggingWindow;
             _mapper = mapper;
+            _databaseStatus = databaseStatus;
 
             _userService = new UserService();
             WindowLoadedCommand = new RelayCommand(() => OnWindowLoaded());
@@ -67,7 +71,7 @@ namespace LifeManagementAppWPF.MainWnd.ViewModel
 
         private void GenerateTabItems()
         {
-            TabItems.Add(new UserInfoTabVM(_userService, _applicationContext, _mapper));
+            TabItems.Add(new UserInfoTabVM(_userService, _applicationContext, _mapper, _databaseStatus));
             TabItems.Add(new TODOItemVM());
         }
         private void OnWindowLoaded()

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.Input;
+using LifeManagementAppWPF.Common.Interfaces;
+using LifeManagementAppWPF.Common.Utils;
 using LifeManagementAppWPF.Global;
 using LifeManagementAppWPF.Sources.TabItems.Interface;
 using LifeManagementAppWPF.Sources.TabItems.UserInfo.Model;
@@ -9,18 +11,23 @@ using System.Windows.Input;
 
 namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
 {
-    class UserInfoTabVM : TabItemBaseVM, IUserInfoTabViewModel
+    class UserInfoTabVM : TabItemBaseVM,
+        IUserInfoTabViewModel,
+        IDatabaseOperationPerforming
     {
         private readonly IUserService _userService;
         private readonly IApplicationContext _applicationContext;
         private readonly IMapper _autoMapper;
+        private readonly IDatabaseStatus _databaseStatus;
         public UserInfoTabVM(IUserService userService,
             IApplicationContext appContext,
-            IMapper autoMapper)
+            IMapper autoMapper,
+            IDatabaseStatus databaseStatus)
         {
             _userService = userService;
             _applicationContext = appContext;
             _autoMapper = autoMapper;
+            _databaseStatus = databaseStatus;
 
             Header = "User Data";
             TabItemLoaded = new RelayCommand(() =>TabItemLoadedExec());
@@ -54,6 +61,11 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
             set => SetProperty(ref _updateUserDataCommand, value);
         }
 
+        public IDatabaseStatus DatabaseStatus 
+        {
+            get => _databaseStatus;
+        }
+
         #endregion
 
         #region Methods
@@ -65,12 +77,16 @@ namespace LifeManagementAppWPF.Sources.TabItems.ViewModel
 
         private async Task GetUserData()
         {
+            DatabaseStatus.StartDatabaseOperation();
+
             var user = await _userService.GetUserByIdAsync(_applicationContext.UserId);
 
             if (user == null) return;
 
             var infoTabData = _autoMapper.Map<UserInfoTabData>(user);
             UserInfoTabData = infoTabData;
+
+            DatabaseStatus.EndDatabaseOperation();
         }
 
         private async Task UpdateUserDataCommandExec()

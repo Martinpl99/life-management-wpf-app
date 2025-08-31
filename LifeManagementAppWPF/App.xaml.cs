@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using LifeManagementAppWPF.Common.Interfaces;
+using LifeManagementAppWPF.Common.Utils;
 using LifeManagementAppWPF.Dialogs.LoggingDialog.Interfaces;
 using LifeManagementAppWPF.Dialogs.LoggingDialog.View;
 using LifeManagementAppWPF.Dialogs.LoggingDialog.ViewModel;
@@ -69,6 +71,7 @@ namespace LifeManagementAppWPF
             });
 
             services.AddLogging();
+            services.AddTransient<IDatabaseStatus, DatabaseStatus>();
         }
     }
 

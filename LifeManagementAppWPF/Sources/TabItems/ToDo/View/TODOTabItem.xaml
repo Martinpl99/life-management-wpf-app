@@ -23,7 +23,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <WrapPanel>
+        <WrapPanel Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
             <Button Margin="0,10,0,10"
                 Command="{Binding AddNewTodoItemCommand}"
                 Content="Add New Item" />
@@ -31,7 +31,11 @@
             <Button Margin="0,10,0,10"
                 Command="{Binding RemoveSelectedTodoItemsCommand}"
                 Content="Remove Selected Items" />
-            
+
+            <Button Margin="0,10,0,10"
+                Command="{Binding RemoveSelectedTodoItemsCommand}"
+                Content="Save changes" />  
+
         </WrapPanel>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="3">
